@@ -1,0 +1,93 @@
+.restaurant-banner {
+  width: 100%;
+  height: 280px;
+  overflow: hidden;
+}
+
+.restaurant-banner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.restaurant-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 32px;
+  padding: 28px 0;
+  border-bottom: 1px solid var(--color-gray-200);
+  flex-wrap: wrap;
+}
+
+.restaurant-header h1 {
+  font-size: 28px;
+  margin-bottom: 6px;
+}
+
+.restaurant-header-cuisine {
+  color: var(--color-text-light);
+  font-size: 15px;
+  margin-bottom: 4px;
+}
+
+.restaurant-header-address {
+  color: var(--color-text-light);
+  font-size: 14px;
+  margin-bottom: 12px;
+}
+
+.restaurant-header-desc {
+  max-width: 480px;
+  font-size: 14px;
+  color: var(--color-text);
+  line-height: 1.6;
+}
+
+.restaurant-header-stats {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.stat-box {
+  background: var(--color-gray-50);
+  border-radius: var(--radius-sm);
+  padding: 14px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 100px;
+}
+
+.stat-box span:first-child {
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--color-dark);
+}
+
+.stat-box span:last-child {
+  font-size: 12px;
+  color: var(--color-text-light);
+}
+
+.stat-rating {
+  color: var(--color-rating) !important;
+}
+
+.status-open span:first-child {
+  color: var(--color-secondary) !important;
+}
+
+.status-closed span:first-child {
+  color: var(--color-danger) !important;
+}
+
+@media (max-width: 700px) {
+  .restaurant-banner {
+    height: 180px;
+  }
+
+  .restaurant-header {
+    flex-direction: column;
+  }
+}
