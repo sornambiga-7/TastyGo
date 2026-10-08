@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    environment {
+        IMAGE_NAME = "ghcr.io/sornambiga-7/tastygo:latest"
+    }
+
     stages {
         stage('Checkout') {
             steps {
@@ -10,20 +14,25 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                bat 'docker build -t tastygo:latest .'
+                bat "docker build -t ${IMAGE_NAME} ."
             }
         }
 
-        stage('Stop Old Container') {
+        stage('Login to GHCR') {
             steps {
-                bat 'docker stop tastygo-app || exit /b 0'
-                bat 'docker rm tastygo-app || exit /b 0'
+                withCredentials([usernamePassword(
+                    credentialsId: 'ghcr-credentials',
+                    usernameVariable: 'GHCR_USER',
+                    passwordVariable: 'GHCR_TOKEN'
+                )]) {
+                    bat 'echo %GHCR_TOKEN% | docker login ghcr.io -u %GHCR_USER% --password-stdin'
+                }
             }
         }
 
-        stage('Run Container') {
+        stage('Push to GHCR') {
             steps {
-                bat 'docker run -d --name tastygo-app -p 8083:80 tastygo:latest'
+                bat "docker push ${IMAGE_NAME}"
             }
         }
     }
